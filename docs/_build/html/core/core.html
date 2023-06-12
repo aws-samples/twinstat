@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core package &mdash; TwinStat 0.2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TwinStat
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">core package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-core.AutoML">core.AutoML module</a><ul>
+<li><a class="reference internal" href="#core.AutoML.autogluon"><code class="docutils literal notranslate"><span class="pre">autogluon</span></code></a><ul>
+<li><a class="reference internal" href="#core.AutoML.autogluon.train"><code class="docutils literal notranslate"><span class="pre">autogluon.train()</span></code></a></li>
+<li><a class="reference internal" href="#core.AutoML.autogluon.predict"><code class="docutils literal notranslate"><span class="pre">autogluon.predict()</span></code></a></li>
+<li><a class="reference internal" href="#core.AutoML.autogluon.load_models"><code class="docutils literal notranslate"><span class="pre">autogluon.load_models()</span></code></a></li>
+<li><a class="reference internal" href="#core.AutoML.autogluon.determine_variable_sensitivity"><code class="docutils literal notranslate"><span class="pre">autogluon.determine_variable_sensitivity()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.LinearRegression">core.LinearRegression module</a><ul>
+<li><a class="reference internal" href="#core.LinearRegression.LinearModel"><code class="docutils literal notranslate"><span class="pre">LinearModel</span></code></a><ul>
+<li><a class="reference internal" href="#core.LinearRegression.LinearModel.fit"><code class="docutils literal notranslate"><span class="pre">LinearModel.fit()</span></code></a></li>
+<li><a class="reference internal" href="#core.LinearRegression.LinearModel.mse"><code class="docutils literal notranslate"><span class="pre">LinearModel.mse</span></code></a></li>
+<li><a class="reference internal" href="#core.LinearRegression.LinearModel.betas"><code class="docutils literal notranslate"><span class="pre">LinearModel.betas</span></code></a></li>
+<li><a class="reference internal" href="#core.LinearRegression.LinearModel.betas_se"><code class="docutils literal notranslate"><span class="pre">LinearModel.betas_se</span></code></a></li>
+<li><a class="reference internal" href="#core.LinearRegression.LinearModel.beta_pvalues"><code class="docutils literal notranslate"><span class="pre">LinearModel.beta_pvalues</span></code></a></li>
+<li><a class="reference internal" href="#core.LinearRegression.LinearModel.predict"><code class="docutils literal notranslate"><span class="pre">LinearModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core.LinearRegression.Polynomial"><code class="docutils literal notranslate"><span class="pre">Polynomial</span></code></a></li>
+<li><a class="reference internal" href="#core.LinearRegression.PiecewisePolynomial"><code class="docutils literal notranslate"><span class="pre">PiecewisePolynomial</span></code></a><ul>
+<li><a class="reference internal" href="#core.LinearRegression.PiecewisePolynomial.fit_knots"><code class="docutils literal notranslate"><span class="pre">PiecewisePolynomial.fit_knots()</span></code></a></li>
+<li><a class="reference internal" href="#core.LinearRegression.PiecewisePolynomial.check_for_duplicates"><code class="docutils literal notranslate"><span class="pre">PiecewisePolynomial.check_for_duplicates()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core.LinearRegression.Exponential"><code class="docutils literal notranslate"><span class="pre">Exponential</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.knn_models">core.knn_models module</a><ul>
+<li><a class="reference internal" href="#core.knn_models.QuantileKNNRegressor"><code class="docutils literal notranslate"><span class="pre">QuantileKNNRegressor</span></code></a><ul>
+<li><a class="reference internal" href="#core.knn_models.QuantileKNNRegressor.predict"><code class="docutils literal notranslate"><span class="pre">QuantileKNNRegressor.predict()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core.knn_models.OutlierKNNDetector"><code class="docutils literal notranslate"><span class="pre">OutlierKNNDetector</span></code></a><ul>
+<li><a class="reference internal" href="#core.knn_models.OutlierKNNDetector.remove_outliers"><code class="docutils literal notranslate"><span class="pre">OutlierKNNDetector.remove_outliers()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.neural_network_base">core.neural_network_base module</a><ul>
+<li><a class="reference internal" href="#core.neural_network_base.base_neural_network"><code class="docutils literal notranslate"><span class="pre">base_neural_network</span></code></a><ul>
+<li><a class="reference internal" href="#core.neural_network_base.base_neural_network.train_test_split"><code class="docutils literal notranslate"><span class="pre">base_neural_network.train_test_split()</span></code></a></li>
+<li><a class="reference internal" href="#core.neural_network_base.base_neural_network.train"><code class="docutils literal notranslate"><span class="pre">base_neural_network.train()</span></code></a></li>
+<li><a class="reference internal" href="#core.neural_network_base.base_neural_network.get_estimate"><code class="docutils literal notranslate"><span class="pre">base_neural_network.get_estimate()</span></code></a></li>
+<li><a class="reference internal" href="#core.neural_network_base.base_neural_network.plot"><code class="docutils literal notranslate"><span class="pre">base_neural_network.plot()</span></code></a></li>
+<li><a class="reference internal" href="#core.neural_network_base.base_neural_network.save_model"><code class="docutils literal notranslate"><span class="pre">base_neural_network.save_model()</span></code></a></li>
+<li><a class="reference internal" href="#core.neural_network_base.base_neural_network.load_model"><code class="docutils literal notranslate"><span class="pre">base_neural_network.load_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.optimization">core.optimization module</a><ul>
+<li><a class="reference internal" href="#core.optimization.GeneticAlgorithm"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithm</span></code></a><ul>
+<li><a class="reference internal" href="#core.optimization.GeneticAlgorithm.genetic_algorithm"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithm.genetic_algorithm()</span></code></a></li>
+<li><a class="reference internal" href="#core.optimization.GeneticAlgorithm.create_images"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithm.create_images()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.sensitivity_analysis">core.sensitivity_analysis module</a><ul>
+<li><a class="reference internal" href="#core.sensitivity_analysis.shapely_sensitivity"><code class="docutils literal notranslate"><span class="pre">shapely_sensitivity()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.statistical_tests">core.statistical_tests module</a><ul>
+<li><a class="reference internal" href="#core.statistical_tests.distribution_difference_MC_test"><code class="docutils literal notranslate"><span class="pre">distribution_difference_MC_test()</span></code></a></li>
+<li><a class="reference internal" href="#core.statistical_tests.distribution_difference_hotelling_test"><code class="docutils literal notranslate"><span class="pre">distribution_difference_hotelling_test()</span></code></a></li>
+<li><a class="reference internal" href="#core.statistical_tests.get_optimal_n_cluster"><code class="docutils literal notranslate"><span class="pre">get_optimal_n_cluster()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.uncertainty_propagation">core.uncertainty_propagation module</a><ul>
+<li><a class="reference internal" href="#core.uncertainty_propagation.uncertainty_propagation"><code class="docutils literal notranslate"><span class="pre">uncertainty_propagation()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core.util">core.util module</a><ul>
+<li><a class="reference internal" href="#core.util.pdf_to_cdf"><code class="docutils literal notranslate"><span class="pre">pdf_to_cdf()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TwinStat</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">core package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/core/core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="core-package">
+<h1>core package<a class="headerlink" href="#core-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-core.AutoML">
+<span id="core-automl-module"></span><h2>core.AutoML module<a class="headerlink" href="#module-core.AutoML" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.AutoML.autogluon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.AutoML.</span></span><span class="sig-name descname"><span class="pre">autogluon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endogenous_variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'twinstat_autogluon'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rmse'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'regression'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_frac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preload</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.AutoML.autogluon" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Enables low effort utilization of autogluon for echelon model
+development and hyperparameter tuning.  Specifically setup for
+only tabular data.</p>
+<p>See <a class="reference external" href="https://auto.gluon.ai/dev/index.html">https://auto.gluon.ai/dev/index.html</a> for more options and
+customization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endogenous_variable</strong> (<em>str</em>) – Variable name of the output variable.</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – File directory path where the Autogluon files will be saved.
+The default is ‘twinstat_autogluon’.</p></li>
+<li><p><strong>num_trials</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of hyperparameter tuning iterations. The default is 10.</p></li>
+<li><p><strong>search_strategy</strong> (<em>str</em><em>, </em><em>optional</em>) – Hyperparameter tuning method. The default is ‘auto’.</p></li>
+<li><p><strong>eval_metric</strong> (<em>str</em><em>, </em><em>optional</em>) – Metric used . The default is ‘rmse’.</p></li>
+<li><p><strong>problem_type</strong> (<em>str</em><em>, </em><em>optional</em>) – The default is ‘regression’.</p></li>
+<li><p><strong>validation_frac</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of data held in the validation test. The default is 0.1.</p></li>
+<li><p><strong>preload</strong> (<em>bool</em><em>, </em><em>optional</em>) – At inference time, autogluon can be quite slow when making predictions.
+This option will preload all of the models into RAM enabling significantly
+faster predictions, albeit at the cost of more RAM usage.
+The default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.AutoML.autogluon.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.AutoML.autogluon.train" title="Permalink to this definition"></a></dt>
+<dd><p>Training include Monte Carlo hyperparameter search
+for each model used in training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – Data includes both the model inputs and outputs</p></li>
+<li><p><strong>num_gpus</strong> (<em>int</em><em>, </em><em>optional</em>) – The default is 0.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.AutoML.autogluon.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.AutoML.autogluon.predict" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.AutoML.autogluon.load_models">
+<span class="sig-name descname"><span class="pre">load_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.AutoML.autogluon.load_models" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.AutoML.autogluon.determine_variable_sensitivity">
+<span class="sig-name descname"><span class="pre">determine_variable_sensitivity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.AutoML.autogluon.determine_variable_sensitivity" title="Permalink to this definition"></a></dt>
+<dd><p>Performs permutation importance sampling to determine
+model sensitivity to inputs.</p>
+<p>A matplotlib figure is generated with the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.LinearRegression">
+<span id="core-linearregression-module"></span><h2>core.LinearRegression module<a class="headerlink" href="#module-core.LinearRegression" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.LinearRegression.LinearModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.LinearRegression.</span></span><span class="sig-name descname"><span class="pre">LinearModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'torch'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.LinearRegression.LinearModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base linear regression object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>backend</strong> (<em>str</em><em>, </em><em>optional</em>) – The backend solver can be “numpy” or “torch”. Pytorch provides
+GPU functionality if needed for large problems.
+The default is ‘torch’.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.LinearRegression.LinearModel.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_relevance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.LinearRegression.LinearModel.fit" title="Permalink to this definition"></a></dt>
+<dd><p>Fit a linear regression to the data.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.LinearRegression.LinearModel.mse">
+<span class="sig-name descname"><span class="pre">mse</span></span><a class="headerlink" href="#core.LinearRegression.LinearModel.mse" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>mean squared error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.LinearRegression.LinearModel.betas">
+<span class="sig-name descname"><span class="pre">betas</span></span><a class="headerlink" href="#core.LinearRegression.LinearModel.betas" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>regression coefficients</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.LinearRegression.LinearModel.betas_se">
+<span class="sig-name descname"><span class="pre">betas_se</span></span><a class="headerlink" href="#core.LinearRegression.LinearModel.betas_se" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>standard error of the betas</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.LinearRegression.LinearModel.beta_pvalues">
+<span class="sig-name descname"><span class="pre">beta_pvalues</span></span><a class="headerlink" href="#core.LinearRegression.LinearModel.beta_pvalues" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pvalue for significance of betas</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Input data.</p></li>
+<li><p><strong>y</strong> (<em>np.array</em>) – Output data</p></li>
+<li><p><strong>beta_relevance</strong> (<em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – <p>If set, the coefficient pvalues will be
+relative to the beta_relevance value.</p>
+<p>E.g. if t_crit = (beta[0] - beta_relevance[0])/se</p>
+<p>The default is None.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.LinearRegression.LinearModel.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Xnew</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_uncertainty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncertainty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'confidence'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.LinearRegression.LinearModel.predict" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Xnew</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>return_uncertainty</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, return both the prediction and the uncertainty of the prediction.
+The default is False.</p></li>
+<li><p><strong>uncertainty</strong> (<em>str</em><em>, </em><em>optional</em>) – Can be “confidence” or “prediction” intervals.
+The default is ‘confidence’.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>prediction</strong> (<em>np.array</em>)</p></li>
+<li><p><em>If return_uncertainty is True also return the SE of the prediction.</em></p></li>
+<li><p><strong>sigma</strong> (<em>np.array</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="core.LinearRegression.Polynomial">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.LinearRegression.</span></span><span class="sig-name descname"><span class="pre">Polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poly_order</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.LinearRegression.Polynomial" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#core.LinearRegression.LinearModel" title="core.LinearRegression.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearModel</span></code></a></p>
+<p>Sets the parametric function form of the linear regression
+to be a polynomial.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>poly_order</strong> (<em>int</em>) – Polynomial order.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="core.LinearRegression.PiecewisePolynomial">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.LinearRegression.</span></span><span class="sig-name descname"><span class="pre">PiecewisePolynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poly_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_knots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.LinearRegression.PiecewisePolynomial" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#core.LinearRegression.LinearModel" title="core.LinearRegression.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearModel</span></code></a></p>
+<p>Sets the parametric function form of the linear regression
+to be a polynomial.  However, add the ability to create
+piecewise knot points that discontinours change slope.
+L0 continuity and not L1 continuity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>poly_order</strong> (<em>int</em>) – Polynomial order.</p></li>
+<li><p><strong>n_knots</strong> (<em>int</em><em>, </em><em>optional</em>) – The default is 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.LinearRegression.PiecewisePolynomial.fit_knots">
+<span class="sig-name descname"><span class="pre">fit_knots</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.LinearRegression.PiecewisePolynomial.fit_knots" title="Permalink to this definition"></a></dt>
+<dd><p>Find the optimal location for the knots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>y</strong> (<em>np.array</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.LinearRegression.PiecewisePolynomial.check_for_duplicates">
+<span class="sig-name descname"><span class="pre">check_for_duplicates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thelist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.LinearRegression.PiecewisePolynomial.check_for_duplicates" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="core.LinearRegression.Exponential">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.LinearRegression.</span></span><span class="sig-name descname"><span class="pre">Exponential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.LinearRegression.Exponential" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#core.LinearRegression.LinearModel" title="core.LinearRegression.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearModel</span></code></a></p>
+<p>Sets the parametric function form of the linear regression
+to be exponential.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-core.knn_models">
+<span id="core-knn-models-module"></span><h2>core.knn_models module<a class="headerlink" href="#module-core.knn_models" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.knn_models.QuantileKNNRegressor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.knn_models.</span></span><span class="sig-name descname"><span class="pre">QuantileKNNRegressor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.knn_models.QuantileKNNRegressor" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">KNeighborsRegressor</span></code></p>
+<p>Extends the Scikit KNN Regression to enable quantile regressions.</p>
+<p>All of the existing functionality of scikit is supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tau</strong> (<em>float</em><em>, </em><em>optional</em>) – The percentile that is used when fitting the data. The default is 0.5.</p></li>
+<li><p><strong>**kwargs</strong> – Send any scikit specific options.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.knn_models.QuantileKNNRegressor.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.knn_models.QuantileKNNRegressor.predict" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>X</strong> (<em>np.array</em>) – (n data x n features)</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>y_pred</strong> – (n data x 1)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="core.knn_models.OutlierKNNDetector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.knn_models.</span></span><span class="sig-name descname"><span class="pre">OutlierKNNDetector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outlier_distance_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outlier_percent_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endog_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">removal_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.knn_models.OutlierKNNDetector" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NearestNeighbors</span></code></p>
+<p>Automatically find outliers and remove from the data set.</p>
+<p>Method #1 —-
+If outlier_percent_threshold is set to a value between 0 and 1, the
+endog_idx is checked. If None, a KDTree is generated to determine the
+distance between all points.  The outliers are flagged as the points
+above and below the outlier_percent_threshold threshold.</p>
+<p>If endog_idx is not None, then a QuantileKNNRegressor is used to relate
+all of the data to the endog_idx variable.  All data points above and below
+the regressed outlier_percent_threshold of QuantileKNNRegressor will be
+removed from the data set.</p>
+<p>Method #2 —-
+If outlier_distance_threshold is provided a QuantileKNNRegressor will
+be used to regress the endog_idx on to the remaining data.  The residuals
+of prediction are calculated, i.e. r = y - yhat.</p>
+<p>All data points exhibiting residuals larger than outlier_distance_threshold
+will be flagged as outliers (i.e. they are not following the behavior of
+surrounding data points.) This process is carried out removal_iterations
+number of times.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outlier_distance_threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – The default is None.</p></li>
+<li><p><strong>outlier_percent_threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – The default is None.</p></li>
+<li><p><strong>endog_idx</strong> (<em>int</em><em>, </em><em>optional</em>) – Index of the response variable.
+The default is None.</p></li>
+<li><p><strong>removal_iterations</strong> (<em>int</em><em>, </em><em>optional</em>) – Small clusters of outliers with varying magnitudes may
+only flag the most extreme outlier.  Repeating the method
+ensures surrounding outliers are also captured.
+The default is 10.</p></li>
+<li><p><strong>**kwargs</strong> (<em>scikit arguments</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.knn_models.OutlierKNNDetector.remove_outliers">
+<span class="sig-name descname"><span class="pre">remove_outliers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.knn_models.OutlierKNNDetector.remove_outliers" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>make_plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – The default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>newX</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.neural_network_base">
+<span id="core-neural-network-base-module"></span><h2>core.neural_network_base module<a class="headerlink" href="#module-core.neural_network_base" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.neural_network_base.base_neural_network">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.neural_network_base.</span></span><span class="sig-name descname"><span class="pre">base_neural_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">AR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_exog_variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_frac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout_frac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_endog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isfilter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_train_split_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'timeseries'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.neural_network_base.base_neural_network" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base object used to define tensorflow objects.  Other
+downstream TwinStat objects are built off of this object
+or users can create custom neural networks off of this
+object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>AR</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of autoregressive lags to include in the
+BNN. The default is 5.</p></li>
+<li><p><strong>n_exog_variables</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of exogenous predictors to generate a ANN model size.
+The default is 0.</p></li>
+<li><p><strong>n_layers</strong> (<em>int</em><em>, </em><em>optional</em>) – Depth of the ANN. The default is 1.</p></li>
+<li><p><strong>hidden_units</strong> (<em>int</em><em>, </em><em>optional</em>) – Width of the ANN. The default is 64.</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em>, </em><em>optional</em>) – Activation function used after each dense layer.
+Accepts all tensorflow input.
+The default is “relu”.</p></li>
+<li><p><strong>lr</strong> (<em>float</em><em>, </em><em>optional</em>) – Optimizer learning rate. The default is 5e-3.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – SGD batch size. The default is 32.</p></li>
+<li><p><strong>validation_frac</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of data to be used in the validation set.
+The default is 0.1.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em><em>, </em><em>optional</em>) – SGD epochs. The default is 10000.</p></li>
+<li><p><strong>dropout_frac</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dropout ANN nodes. Only used in training.
+The default is 0.0.</p></li>
+<li><p><strong>optimize</strong> (<em>bool</em><em>, </em><em>optional</em><em> (</em><em>not setup yet</em><em>)</em>) – If true, the NN will be optimized with a bayesian optimizer
+to find the best depth, width, learning rate, and activation function
+for the provided data. The default is False.</p></li>
+<li><p><strong>include_endog</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, the lagged endogenous variable will be included
+as a predictor. The default is True.</p></li>
+<li><p><strong>isfilter</strong> (<em>bool</em><em>, </em><em>optional</em>) – <dl>
+<dt>If true, the current time endogenous variable will be</dt><dd><p>included as a predictor.  Warning, this is useful when
+creating a filter, but otherwise the neural network will
+overfit by learning to simply pass the current time through
+the graph and to the output to achieve perfect accuracy.
+The default is False.</p>
+</dd>
+<dt>scale_y<span class="classifier">bool, optional</span></dt><dd><p>Scale the response variable prior to training and prediction.
+The default is False.</p>
+</dd>
+<dt>test_train_split_method<span class="classifier">str, optional</span></dt><dd><p>If ‘timeseries’  the split is a cut in the timeseries in which
+the first (1-validation_frac) is used for training and the
+last validation_frac is used for validation.</p>
+<p>If ‘random’ the split is a randomly selected (1 - validation_frac)
+for training and the remaining validation_frac used for
+validation.</p>
+<p>The default is ‘timeseries’.</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.neural_network_base.base_neural_network.train_test_split">
+<span class="sig-name descname"><span class="pre">train_test_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.neural_network_base.base_neural_network.train_test_split" title="Permalink to this definition"></a></dt>
+<dd><p>Timeseries train/test splitting uses
+the first (1-validation_frac) for the training
+set and the last validation_frac for the test set.</p>
+<p>Unless the ‘test_train_split_method’ is set to random in
+which the (1-validation_frac) is randomly selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>data</strong> (<em>np.array</em>) – </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>train_y</strong> (<em>np.array</em>)</p></li>
+<li><p><strong>train_X</strong> (<em>np.array</em>)</p></li>
+<li><p><strong>test_y</strong> (<em>np.array</em>)</p></li>
+<li><p><strong>test_X</strong> (<em>np.array</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.neural_network_base.base_neural_network.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patience</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.neural_network_base.base_neural_network.train" title="Permalink to this definition"></a></dt>
+<dd><p>Train the neural network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>y</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>X</strong> (<em>np.array</em><em>, </em><em>optional</em>) – </p></li>
+<li><p><strong>patience</strong> – Early stoppage criteria. Number of iterations
+with no improvement in the validation set.  The
+model with best validation score is kept.</p></li>
+<li><p><strong>int</strong> – Early stoppage criteria. Number of iterations
+with no improvement in the validation set.  The
+model with best validation score is kept.</p></li>
+<li><p><strong>optional</strong> – Early stoppage criteria. Number of iterations
+with no improvement in the validation set.  The
+model with best validation score is kept.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.neural_network_base.base_neural_network.get_estimate">
+<span class="sig-name descname"><span class="pre">get_estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.neural_network_base.base_neural_network.get_estimate" title="Permalink to this definition"></a></dt>
+<dd><p>Make a prediction with ANN.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>y</strong> (<em>np.array</em>) – Endogenous Variable</p></li>
+<li><p><strong>X</strong> (<em>np.array</em>) – Exogenous Variables</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>predictions</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.neural_network_base.base_neural_network.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.neural_network_base.base_neural_network.plot" title="Permalink to this definition"></a></dt>
+<dd><p>Generates the following plots:
+:rtype: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+<blockquote>
+<div><dl class="simple">
+<dt><a href="#id1"><span class="problematic" id="id2">*</span></a>a plot of the training and validation</dt><dd><p>loss functions over the number of epochs.</p>
+</dd>
+</dl>
+<p><a href="#id3"><span class="problematic" id="id4">*</span></a>Residual vs yhat and yhat vs y
+<a href="#id5"><span class="problematic" id="id6">*</span></a>Timeseries of y and the fitted line yhat</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>save_fig</strong> (<em>bool</em><em>, </em><em>optional</em>) – Save a jpg of the figure. The default is False.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.neural_network_base.base_neural_network.save_model">
+<span class="sig-name descname"><span class="pre">save_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.neural_network_base.base_neural_network.save_model" title="Permalink to this definition"></a></dt>
+<dd><p>save the model for later use</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.neural_network_base.base_neural_network.load_model">
+<span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.neural_network_base.base_neural_network.load_model" title="Permalink to this definition"></a></dt>
+<dd><p>load the model weights and config values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.optimization">
+<span id="core-optimization-module"></span><h2>core.optimization module<a class="headerlink" href="#module-core.optimization" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.optimization.GeneticAlgorithm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.optimization.</span></span><span class="sig-name descname"><span class="pre">GeneticAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fitness_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">population_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutation_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossover_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'chromosome'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.optimization.GeneticAlgorithm" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Create object for genetic algorithm global heuristic optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fitness_function</strong> – Python exectuable function that accepts an array X and ouputs a fitness
+score.  The algorithm seeks to minimize this function. To perform a maximization,
+users should output the negative score.</p></li>
+<li><p><strong>population_size</strong> (<em>int</em>) – Total sample size for individual chromosomes</p></li>
+<li><p><strong>generations</strong> (<em>int</em>) – Number of generations to refine the population</p></li>
+<li><p><strong>bounds</strong> (<em>list</em><em>[</em><em>tuple</em><em>]</em>) – <p>The population will be prevented from going outside
+of these bounds. The location in the list must correspond
+to the input variables.</p>
+<p>E.g. bounds = [(0,1)]</p>
+</p></li>
+<li><p><strong>record_method</strong> (<em>str</em><em>, </em><em>optional</em>) – Only csv file record is setup. All data saved to
+‘GA_generation_data.csv’.  Eventually SQL support will be added.
+The default is ‘csv’.</p></li>
+<li><p><strong>mutation_rate</strong> (<em>float</em><em>, </em><em>optional</em>) – What fraction of the population will experience a random mutation.
+The default is 0.1.</p></li>
+<li><p><strong>best_fraction</strong> (<em>float</em><em>, </em><em>optional</em>) – The ‘best_fraction’ of the population will be kept and the rest removed
+from the population. The default is 0.5.</p></li>
+<li><p><strong>crossover_method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>chromosome | hillclimbing | switch.</p>
+<p>’Chromosome’ uses a random switch point in the two parent vectors to create
+new offspring.</p>
+<p>’Hilleclimbing’ uses the random weighted average to create offspring.</p>
+<p>’Switch’ will use chromosome until the last 10 generations and then the
+method is switched to hillclimbing to fine tune the remainder.</p>
+<p>The default is ‘chromosome’.</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">genetic_algorithm:</span></span></dt>
+<dd><p>perform the optimization</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">create_images:</span></span></dt>
+<dd><p>create a scatter plot for each generation to show the evolution of the population
+also creates a convergence plot after each generation to provide some understanding
+of how the optimization progress.</p>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.optimization.GeneticAlgorithm.genetic_algorithm">
+<span class="sig-name descname"><span class="pre">genetic_algorithm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.optimization.GeneticAlgorithm.genetic_algorithm" title="Permalink to this definition"></a></dt>
+<dd><p>Perform the genetic algorithm optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – Best vector</p></li>
+<li><p><em>float</em> – Best fitness score</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.optimization.GeneticAlgorithm.create_images">
+<span class="sig-name descname"><span class="pre">create_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">only_convergence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.optimization.GeneticAlgorithm.create_images" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>only_convergence</strong> (<em>bool</em><em>, </em><em>optional</em>) – <p>If false, a scatter plot is created for each
+generation of the optimization.</p>
+<p>In additional the minimum fitness score is
+plotted for each generation.</p>
+<p>If true, only the convergence figure is
+generated.</p>
+<p>The default is False.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.sensitivity_analysis">
+<span id="core-sensitivity-analysis-module"></span><h2>core.sensitivity_analysis module<a class="headerlink" href="#module-core.sensitivity_analysis" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="core.sensitivity_analysis.shapely_sensitivity">
+<span class="sig-prename descclassname"><span class="pre">core.sensitivity_analysis.</span></span><span class="sig-name descname"><span class="pre">shapely_sensitivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.sensitivity_analysis.shapely_sensitivity" title="Permalink to this definition"></a></dt>
+<dd><p>Determine the shapely sensitivities of each ‘output’ variable.</p>
+<p>A TwinStat Gaussian Process is used to map the inputs to outputs and shapely
+sampling is performed on the Gaussian Process.</p>
+<p>The package shap is used for the shap sampling.
+<a class="reference external" href="https://shap.readthedocs.io/en/latest/index.html">https://shap.readthedocs.io/en/latest/index.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of the names of inputs.</p></li>
+<li><p><strong>outputs</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of the names of outputs.  The sensivitiy of the inputs to
+each output will be calculated and a new gaussian process made
+for each input/output combination.</p></li>
+<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>keys: output variables
+values: list of shapely values normalized to sum to 1.0</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-core.statistical_tests">
+<span id="core-statistical-tests-module"></span><h2>core.statistical_tests module<a class="headerlink" href="#module-core.statistical_tests" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="core.statistical_tests.distribution_difference_MC_test">
+<span class="sig-prename descclassname"><span class="pre">core.statistical_tests.</span></span><span class="sig-name descname"><span class="pre">distribution_difference_MC_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mixtures_X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mixtures_Y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gmm_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.statistical_tests.distribution_difference_MC_test" title="Permalink to this definition"></a></dt>
+<dd><p>Fit a Gaussian Mixture Model to the input data sets.  Then use Monte Carlo
+integration to determine the volume of overlap in probablity space. Small overlap
+volumes indicate there is little evidence that Y was generated from
+the same distribution as X.</p>
+<p>Large dimensional problems will require normalization of the results due to overall
+parameter space volume.  Example: if we have X data for 50 IoT data streams, if a
+few points are taken from X and used as Y, due to the vastness of the hyper-volume
+when the overlap is integreated, the result is a small value.  Therefore, when using
+this algorithm, we are looking for small values on the order of 1e-9, not standard
+statistical inferrencing values such as 0.01.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianMixture</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Data set 1 (n data X n features)</p></li>
+<li><p><strong>Y</strong> (<em>np.array</em>) – Data set 2 (n data X n features)</p></li>
+<li><p><strong>n_mixtures_X</strong> (<em>int</em><em>, </em><em>optional</em>) – If using a standard Gaussian Mixture Model, the number of clusters
+must be inputed.  When using “bayesian”, this is the max clusters that could be used.
+The default is 50.</p></li>
+<li><p><strong>n_mixtures_Y</strong> (<em>int</em><em>, </em><em>optional</em>) – If using a standard Gaussian Mixture Model, the number of clusters
+must be inputed.  When using “bayesian”, this is the max clusters that could be used.
+The default is 50.</p></li>
+<li><p><strong>gmm_type</strong> (<em>str</em><em>, </em><em>optional</em>) – “standard” or “bayesian”.
+The default is “standard”.</p></li>
+<li><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of monte carlo samples to use in the integration. The default is 500000.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The dictionary includes the pvalues for each clustered distribution, in which
+a large p-value means it is likely data from Y came from X and a low pvalue
+means there is little evidence that Y came from X.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict and GaussianMixture and GaussianMixture</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.statistical_tests.distribution_difference_hotelling_test">
+<span class="sig-prename descclassname"><span class="pre">core.statistical_tests.</span></span><span class="sig-name descname"><span class="pre">distribution_difference_hotelling_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mixtures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gmm_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.statistical_tests.distribution_difference_hotelling_test" title="Permalink to this definition"></a></dt>
+<dd><p>Fit a Gaussian Mixture Model to the input data sets.  Determine the Hotelling T^2 and
+p-values to determine if two data sets are different.</p>
+<p>Note this method is determining if the means of multivariate distributions are difference
+and accounting for the variance in both distributions.  It will likely flag all IoT data
+has being different from the original X data if you looking at sub regions of the original
+sample set.  Hence, this can be used for comparing overal distributions, not individual
+data from peripherial regions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianMixture</span></code></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Reference:</dt><dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Hotelling%27s_T-squared_distribution">https://en.wikipedia.org/wiki/Hotelling%27s_T-squared_distribution</a></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Data set 1 (n data X n features)</p></li>
+<li><p><strong>Y</strong> (<em>np.array</em>) – Data set 2 (n data X n features)</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – Statistical significance level. The default is 0.05.</p></li>
+<li><p><strong>n_mixtures_Y</strong> (<em>int</em><em>, </em><em>optional</em>) – If using a standard Gaussian Mixture Model, the number of clusters
+must be inputed.  When using “bayesian”, this is the max clusters that could be used.
+The default is 50.</p></li>
+<li><p><strong>gmm_type</strong> (<em>str</em><em>, </em><em>optional</em>) – “standard” or “bayesian”.
+The default is “standard”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The dictionary includes the pvalues for each clustered distribution, in which
+a large p-value means it is likely data from Y came from X and a low pvalue
+means there is little evidence that Y came from X.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict and GaussianMixture and GaussianMixture</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.statistical_tests.get_optimal_n_cluster">
+<span class="sig-prename descclassname"><span class="pre">core.statistical_tests.</span></span><span class="sig-name descname"><span class="pre">get_optimal_n_cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_cluster</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.statistical_tests.get_optimal_n_cluster" title="Permalink to this definition"></a></dt>
+<dd><p>Use the silhouette score to find the optimal number of
+clusters in the data.  This function leverages KMeans unsupervised
+clustering.</p>
+<p>This method looks for 2 or more clusters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Data to look for clustering.</p></li>
+<li><p><strong>max_cluster</strong> (<em>int</em><em>, </em><em>optional</em>) – The default is 20.</p></li>
+<li><p><strong>make_plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Plot the silhouette score for all number of clusters.
+The default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of clusters with the maximum silhouette score.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-core.uncertainty_propagation">
+<span id="core-uncertainty-propagation-module"></span><h2>core.uncertainty_propagation module<a class="headerlink" href="#module-core.uncertainty_propagation" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="core.uncertainty_propagation.uncertainty_propagation">
+<span class="sig-prename descclassname"><span class="pre">core.uncertainty_propagation.</span></span><span class="sig-name descname"><span class="pre">uncertainty_propagation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluate_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pce_degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'monte_carlo'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'latin_hypercube'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.uncertainty_propagation.uncertainty_propagation" title="Permalink to this definition"></a></dt>
+<dd><p>chaospy provides utility functions for generating joint
+probablity sampling distributions.</p>
+<p>The actual creation of a the PCE becomes exponentially slower with
+the number of variables and thus basic MC might be needed for higher
+dimension count.</p>
+<p>Also, if the objective function runtime is fast, no need for PCE.</p>
+<p>Function assumes the TwinModules function ‘setup_uncertainty_propagation_db’
+was used to setup an RDS database for data storage.</p>
+<p>Upon completion of the posterior distribution calculation, this function
+will automatically run the ‘shapely_sensitivity’ to determine which
+inputs have the greatest impact on the outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>evaluate_data</strong> (<em>function</em>) – Python function that accepts a vector X</p></li>
+<li><p><strong>config</strong> (<em>dict</em>) – <dl>
+<dt>Contains:</dt><dd><p>’num_samples’: int, number of sobel samples
+‘sample_dist_input_#’: list, [str, float]</p>
+<blockquote>
+<div><p>[sampling distribution, inputs into sampling distribution]</p>
+</div></blockquote>
+<p>’result_#’: str, outputs of the evaluate_data function
+‘secret_name’ : str, AWS secret name providing security credentials
+‘region_name’ : str, AWS region of the RDS database
+‘mysql_db_endpoint’ : str, location of SQL database such as AWS RDS endpoint</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s1">&#39;num_samples&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">number</span> <span class="n">of</span> <span class="n">sobel</span> <span class="n">samples</span>
+  <span class="s1">&#39;sample_dist_input_0&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;TruncNormal&quot;</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
+  <span class="s2">&quot;sample_dist_input_1&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Uniform&quot;</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+  <span class="s2">&quot;result_0&quot;</span> <span class="p">:</span> <span class="s2">&quot;deg&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;result_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;ms&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;result_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;LoadCellTension1_N_1&quot;</span><span class="p">,</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>pce_degree</strong> (<em>int</em><em>, </em><em>optional</em>) – PCE polynomial order.
+The default is 6.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Either ‘monte_carlo’ or ‘pce’.</p>
+<p>Both methods will use use sobol sampling of the user provided sampling
+distributions.</p>
+<dl class="simple">
+<dt>’pce’<span class="classifier">polynomial chaos expansion requires appreciably less samples than</span></dt><dd><p>traditional monte carlo methods to determine the posterior distribution.
+However, the complexity of the mapping polynomial scales poorly. Depending
+on the user defined sampling distribution, pce may become prohibitively
+slow for higher dimensions, e.g. &gt; ~20</p>
+</dd>
+</dl>
+<p>’monte_carlo’ :</p>
+<p>The default is ‘monte_carlo’.</p>
+</p></li>
+<li><p><strong>sampling_method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Sets how will the input distributions be sampled.</p>
+<p>Using purely random sampling is typically not advisable due to the inefficiency
+associated with natural clustering.</p>
+<p>A space filling method is recommended, but there are many options.</p>
+<p>References discussing Sobol and Latin Hyper Cube:</p>
+<p>Mainly discussing integration; concludes Sobol is best for
+integration:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://arxiv.org/ftp/arxiv/papers/1505/1505.02350.pdf">https://arxiv.org/ftp/arxiv/papers/1505/1505.02350.pdf</a></p>
+</div></blockquote>
+<p>Specifically discussing uncertainty propagation; concludes
+Latin Hyper Cube generally is best for uncertainty quantification:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://www.osti.gov/servlets/purl/806696">https://www.osti.gov/servlets/purl/806696</a></p>
+</div></blockquote>
+<p>For a sample size of 100,000 with 9 dimensions</p>
+<p>Latin Hyper Cube is ~21.0% slower than brute Monte Carlo
+Sobol is ~438.0% slower than brute Monte Carlo</p>
+<p>The default is ‘latin_hypercube’.</p>
+</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – The default is 0.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-core.util">
+<span id="core-util-module"></span><h2>core.util module<a class="headerlink" href="#module-core.util" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="core.util.pdf_to_cdf">
+<span class="sig-prename descclassname"><span class="pre">core.util.</span></span><span class="sig-name descname"><span class="pre">pdf_to_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.util.pdf_to_cdf" title="Permalink to this definition"></a></dt>
+<dd><p>Convert a pdf to cdf</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.array</em>) – The random variable output.</p></li>
+<li><p><strong>p</strong> (<em>np.array</em>) – The probability density of x</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cdf</strong> – The cumulative probability</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-core" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, AWS AC Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

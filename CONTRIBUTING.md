@@ -1,59 +1,95 @@
-# Contributing Guidelines
-
-Thank you for your interest in contributing to our project. Whether it's a bug report, new feature, correction, or additional
-documentation, we greatly value feedback and contributions from our community.
-
-Please read through this document before submitting any issues or pull requests to ensure we have all the necessary
-information to effectively respond to your bug report or contribution.
+# How to contribute
 
 
-## Reporting Bugs/Feature Requests
+## Dependencies
 
-We welcome you to use the GitHub issue tracker to report bugs or suggest features.
+We use [poetry](https://github.com/python-poetry/poetry) to manage the dependencies.
 
-When filing an issue, please check existing open, or recently closed, issues to make sure somebody else hasn't already
-reported the issue. Please try to include as much information as you can. Details like these are incredibly useful:
+To install them you would need to run `install` command:
 
-* A reproducible test case or series of steps
-* The version of our code being used
-* Any modifications you've made relevant to the bug
-* Anything unusual about your environment or deployment
+```bash
+poetry install
+```
 
-
-## Contributing via Pull Requests
-Contributions via pull requests are much appreciated. Before sending us a pull request, please ensure that:
-
-1. You are working against the latest source on the *main* branch.
-2. You check existing open, and recently merged, pull requests to make sure someone else hasn't addressed the problem already.
-3. You open an issue to discuss any significant work - we would hate for your time to be wasted.
-
-To send us a pull request, please:
-
-1. Fork the repository.
-2. Modify the source; please focus on the specific change you are contributing. If you also reformat all the code, it will be hard for us to focus on your change.
-3. Ensure local tests pass.
-4. Commit to your fork using clear commit messages.
-5. Send us a pull request, answering any default questions in the pull request interface.
-6. Pay attention to any automated CI failures reported in the pull request, and stay involved in the conversation.
-
-GitHub provides additional document on [forking a repository](https://help.github.com/articles/fork-a-repo/) and
-[creating a pull request](https://help.github.com/articles/creating-a-pull-request/).
+To activate your `virtualenv` run `poetry shell`.
 
 
-## Finding contributions to work on
-Looking at the existing issues is a great way to find something to contribute on. As our projects, by default, use the default GitHub issue labels (enhancement/bug/duplicate/help wanted/invalid/question/wontfix), looking at any 'help wanted' issues is a great place to start.
+## One magic command
+
+Run `make test` to run everything we have!
 
 
-## Code of Conduct
-This project has adopted the [Amazon Open Source Code of Conduct](https://aws.github.io/code-of-conduct).
-For more information see the [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq) or contact
-opensource-codeofconduct@amazon.com with any additional questions or comments.
+## Tests
+
+We use `pytest` and `flake8` for quality control.
+We also use [wemake_python_styleguide](https://github.com/wemake-services/wemake-python-styleguide) to enforce the code quality.
+
+To run all tests:
+
+```bash
+pytest
+```
+
+To run linting:
+
+```bash
+flake8 .
+```
+Keep in mind: default virtual environment folder excluded by flake8 style checking is `.venv`.
+If you want to customize this parameter, you should do this in `setup.cfg`.
+These steps are mandatory during the CI.
 
 
-## Security issue notifications
-If you discover a potential security issue in this project we ask that you notify AWS/Amazon Security via our [vulnerability reporting page](http://aws.amazon.com/security/vulnerability-reporting/). Please do **not** create a public github issue.
+## Type checks
+
+We use `mypy` to run type checks on our code.
+To use it:
+
+```bash
+mypy twinstat tests/**/*.py
+```
+
+This step is mandatory during the CI.
 
 
-## Licensing
+## Submitting your code
 
-See the [LICENSE](LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
+We use [trunk based](https://trunkbaseddevelopment.com/)
+development (we also sometimes call it `wemake-git-flow`).
+
+What the point of this method?
+
+1. We use protected `master` branch,
+   so the only way to push your code is via pull request
+2. We use issue branches: to implement a new feature or to fix a bug
+   create a new branch named `issue-$TASKNUMBER`
+3. Then create a pull request to `master` branch
+4. We use `git tag`s to make releases, so we can track what has changed
+   since the latest release
+
+So, this way we achieve an easy and scalable development process
+which frees us from merging hell and long-living branches.
+
+In this method, the latest version of the app is always in the `master` branch.
+
+### Before submitting
+
+Before submitting your code please do the following steps:
+
+1. Run `pytest` to make sure everything was working before
+2. Add any changes you want
+3. Add tests for the new changes
+4. Edit documentation if you have changed something significant
+5. Update `CHANGELOG.md` with a quick summary of your changes
+6. Run `pytest` again to make sure it is still working
+7. Run `mypy` to ensure that types are correct
+8. Run `flake8` to ensure that style is correct
+9. Run `doc8` to ensure that docs are correct
+
+
+## Other help
+
+You can contribute by spreading a word about this library.
+It would also be a huge contribution to write
+a short article on how you are using this project.
+You can also share your best practices with us.

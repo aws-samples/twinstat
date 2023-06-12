@@ -1,0 +1,91 @@
+[tool.poetry]
+name = "twinstat"
+description = "A data science python library (twinstat) is needed as a toolbox to be used by a variety of other AWS services ranging from Twinmaker, do-pm, SimSpace Weaver, SageMaker, etc. twinstat needs to include different methods for general subcategories of data science needs."
+version = "0.2.0"
+license = "MIT"
+
+authors = []
+
+readme = "README.md"
+
+repository = "https://gitlab.aws.dev/autonomouscomputesateam/twinstat"
+
+keywords = []
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.poetry.dependencies]
+python =  ">=3.10,<3.11"
+arch="5.5.0"
+matplotlib="3.7.1"
+numpy="1.23.4"
+particles="0.3"
+pmdarima="1.8.5"
+#pykalman="0.9.5"
+tensorflow="2.12.0"
+tensorflow-addons="0.20.0"
+tensorflow-probability="0.19.0"
+poetry = "^1.2.2"
+pipx = "^1.1.0"
+userpath = "^1.8.0"
+jinja2-git = "^1.3.0"
+lice = "^0.6"
+click="8.1.3"
+pytest="7.3.1"
+sphinx="6.2.1"
+m2r2 = "^0.3.3"
+sphinx-autodoc-typehints = "^1.19.5"
+scipy="1.10.1"
+gpytorch="1.10"
+llvmlite="0.39.1"
+numba="0.56.4"
+scikit-learn="1.2.2"
+autogluon="0.7.0"
+chaospy="^4.3"
+tensorflow-io-gcs-filesystem="0.31.0"
+shap="^0.41"
+#nvidia-cublas-cu11= {url = "https://files.pythonhosted.org/packages/ce/41/fdeb62b5437996e841d83d7d2714ca75b886547ee8017ee2fe6ea409d983/nvidia_cublas_cu11-11.10.3.66-py3-none-manylinux1_x86_64.whl"}
+#nvidia-cuda-runtime-cu11  = {url = "https://files.pythonhosted.org/packages/36/92/89cf558b514125d2ebd8344dd2f0533404b416486ff681d5434a5832a019/nvidia_cuda_runtime_cu11-11.7.99-py3-none-manylinux1_x86_64.whl"}
+#nvidia-cudnn-cu11  = {url = "https://files.pythonhosted.org/packages/dc/30/66d4347d6e864334da5bb1c7571305e501dcb11b9155971421bb7bb5315f/nvidia_cudnn_cu11-8.5.0.96-2-py3-none-manylinux1_x86_64.whl"}
+#nvidia-cuda-nvrtc-cu11  = {url = "https://files.pythonhosted.org/packages/ef/25/922c5996aada6611b79b53985af7999fc629aee1d5d001b6a22431e18fec/nvidia_cuda_nvrtc_cu11-11.7.99-2-py3-none-manylinux1_x86_64.whl"}
+
+
+[tool.poetry.group.test.dependencies]
+mypy = "^0.982"
+
+wemake-python-styleguide = "^0.17"
+flake8-pytest-style = "^1.6"
+doc8 = "^1.0"
+nitpick = "^0.32"
+
+safety = "^2.3"
+
+pytest="7.3.1"
+pytest-cov = "^4.0"
+pytest-randomly = "^3.12"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx="6.2.1"
+sphinx-autodoc-typehints = "^1.19"
+m2r2 = "^0.3"
+tomli="2.0.1"
+
+
+[build-system]
+requires = ["poetry-core>=1.2.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.nitpick]
+style = "https://raw.githubusercontent.com/wemake-services/wemake-python-styleguide/master/styles/nitpick-style-wemake.toml"
+
+
+

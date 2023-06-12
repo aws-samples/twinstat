@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>timeseries_forecast package &mdash; TwinStat 0.2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TwinStat
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">timeseries_forecast package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-timeseries_forecast.AR_NN_models">timeseries_forecast.AR_NN_models module</a><ul>
+<li><a class="reference internal" href="#timeseries_forecast.AR_NN_models.AR_quantile_neural_network"><code class="docutils literal notranslate"><span class="pre">AR_quantile_neural_network</span></code></a><ul>
+<li><a class="reference internal" href="#timeseries_forecast.AR_NN_models.AR_quantile_neural_network.load_model"><code class="docutils literal notranslate"><span class="pre">AR_quantile_neural_network.load_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-timeseries_forecast.GP_model">timeseries_forecast.GP_model module</a><ul>
+<li><a class="reference internal" href="#timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth"><code class="docutils literal notranslate"><span class="pre">PhysicsKernel_CrackGrowth</span></code></a><ul>
+<li><a class="reference internal" href="#timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth.C"><code class="docutils literal notranslate"><span class="pre">PhysicsKernel_CrackGrowth.C</span></code></a></li>
+<li><a class="reference internal" href="#timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth.m"><code class="docutils literal notranslate"><span class="pre">PhysicsKernel_CrackGrowth.m</span></code></a></li>
+<li><a class="reference internal" href="#timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth.forward"><code class="docutils literal notranslate"><span class="pre">PhysicsKernel_CrackGrowth.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#timeseries_forecast.GP_model.GPModel"><code class="docutils literal notranslate"><span class="pre">GPModel</span></code></a><ul>
+<li><a class="reference internal" href="#timeseries_forecast.GP_model.GPModel.train"><code class="docutils literal notranslate"><span class="pre">GPModel.train()</span></code></a></li>
+<li><a class="reference internal" href="#timeseries_forecast.GP_model.GPModel.update_training_data"><code class="docutils literal notranslate"><span class="pre">GPModel.update_training_data()</span></code></a></li>
+<li><a class="reference internal" href="#timeseries_forecast.GP_model.GPModel.get_estimate"><code class="docutils literal notranslate"><span class="pre">GPModel.get_estimate()</span></code></a></li>
+<li><a class="reference internal" href="#timeseries_forecast.GP_model.GPModel.plot"><code class="docutils literal notranslate"><span class="pre">GPModel.plot()</span></code></a></li>
+<li><a class="reference internal" href="#timeseries_forecast.GP_model.GPModel.print_parameters"><code class="docutils literal notranslate"><span class="pre">GPModel.print_parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-timeseries_forecast.parametric">timeseries_forecast.parametric module</a><ul>
+<li><a class="reference internal" href="#timeseries_forecast.parametric.ts_model"><code class="docutils literal notranslate"><span class="pre">ts_model</span></code></a><ul>
+<li><a class="reference internal" href="#timeseries_forecast.parametric.ts_model.plot"><code class="docutils literal notranslate"><span class="pre">ts_model.plot()</span></code></a></li>
+<li><a class="reference internal" href="#timeseries_forecast.parametric.ts_model.auto_arch"><code class="docutils literal notranslate"><span class="pre">ts_model.auto_arch()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-timeseries_forecast">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TwinStat</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">timeseries_forecast package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/timeseries_forecast/timeseries_forecast.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="timeseries-forecast-package">
+<h1>timeseries_forecast package<a class="headerlink" href="#timeseries-forecast-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-timeseries_forecast.AR_NN_models">
+<span id="timeseries-forecast-ar-nn-models-module"></span><h2>timeseries_forecast.AR_NN_models module<a class="headerlink" href="#module-timeseries_forecast.AR_NN_models" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="timeseries_forecast.AR_NN_models.AR_quantile_neural_network">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">timeseries_forecast.AR_NN_models.</span></span><span class="sig-name descname"><span class="pre">AR_quantile_neural_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantile'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.AR_NN_models.AR_quantile_neural_network" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">base_neural_network</span></code></p>
+<p>Use a tensorflow to train an autoregressive
+quantile neural network.  The loss seeks to minimize
+the weighted residual based on the quantile which causes
+predicitions to estimate the expectation of the quantile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tau</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>Determines the quantile [0.0-1.0] that the network
+will seek to follow.  The default is 0.5.</p>
+<p>Example: 0.5 will result in following the median of the data
+where as 0.95 will attempt to cover 95% of the data.</p>
+</p></li>
+<li><p><strong>loss_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Determines the loss function to use while training the
+neural network.  The default is ‘quantile’.  Accepts
+strings for any of the standard tensorflow loss functions.</p></li>
+<li><p><strong>tau</strong> – The percentile to use in a quantile regression. The default is 0.5.</p></li>
+<li><p><strong>loss_type</strong> – Any tensorflow loss or ‘quantile’. The default is ‘quantile’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="timeseries_forecast.AR_NN_models.AR_quantile_neural_network.load_model">
+<span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.AR_NN_models.AR_quantile_neural_network.load_model" title="Permalink to this definition"></a></dt>
+<dd><p>load the model weights and config values</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-timeseries_forecast.GP_model">
+<span id="timeseries-forecast-gp-model-module"></span><h2>timeseries_forecast.GP_model module<a class="headerlink" href="#module-timeseries_forecast.GP_model" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">timeseries_forecast.GP_model.</span></span><span class="sig-name descname"><span class="pre">PhysicsKernel_CrackGrowth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_crack_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic_load</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">torch.Size([])</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Mean</span></code></p>
+<p>This object serves as an example of including a physics function in the
+Gaussian Process.  Pytorch will optimize the registered parameters
+including the defined constraints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initial_crack_length</strong> (<em>float</em>) – Initial crack size to be inserted as a constant in Paris equation.</p></li>
+<li><p><strong>periodic_load</strong> (<em>float</em><em>, </em><em>optional</em>) – Cyclic load causing crack propagation. The default is 0.05.</p></li>
+<li><p><strong>batch_shape</strong> (<em>int</em><em>, </em><em>optional</em>) – Size of batches to train on in SGD. The default is torch.Size().</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth.C">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">C</span></span><a class="headerlink" href="#timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth.C" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth.m">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m</span></span><a class="headerlink" href="#timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth.m" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.GP_model.PhysicsKernel_CrackGrowth.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Using the Paris equation for crack propgation under a cyclic
+load.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>cycles</em><em> of </em><em>fatigue</em>) – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>at</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>crack size at time t</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="timeseries_forecast.GP_model.GPModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">timeseries_forecast.GP_model.</span></span><span class="sig-name descname"><span class="pre">GPModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'basic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'constant'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lengthscale_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputscale_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic_period_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic_lengthscale_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">likelihood_noise_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_cholesky</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mixtures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RBF'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_auto_stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_stop_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">early_stoppage_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.GP_model.GPModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Using gpytorch as the backend solver, this object constructs a
+Gaussian Process of varying levels of complexity, which includes
+incorporation of physics objects to both resolve the covaraince
+and calibrate the model inputs.</p>
+<p>The main goal here is bring scikit ease of use to the powerful scaling
+and flexibility of gpytorch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_x</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>train_y</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>lr</strong> (<em>float</em><em>, </em><em>optional</em>) – Learning rate used in SGD. The default is 0.1.</p></li>
+<li><p><strong>model_type</strong> (<em>str</em><em>, </em><em>optional</em>) – basic or spectral_mixing. The default is ‘basic’.</p></li>
+<li><p><strong>mean_function</strong> (<em>str</em><em>, </em><em>optional</em>) – ‘constant’,’linear’, or custom object such as the ‘PhysicsKernel_CrackGrowth’.
+The default is ‘constant’.</p></li>
+<li><p><strong>likelihood_function</strong> (<em>str</em><em>, </em><em>optional</em>) – Only supports gaussian at the moment. The default is ‘gaussian’.</p></li>
+<li><p><strong>lengthscale_constraint</strong> (<em>float</em><em>, </em><em>optional</em>) – Constraint used in the lengthscale of the kernel. The default is None.</p></li>
+<li><p><strong>outputscale_constraint</strong> (<em>float</em><em>, </em><em>optional</em>) – Constraint used in the prediction output. The default is None.</p></li>
+<li><p><strong>periodic_period_constraint</strong> (<em>float</em><em>, </em><em>optional</em>) – Constraint used in the period of the periodic kernel if present. The default is None.</p></li>
+<li><p><strong>periodic_lengthscale_constraint</strong> (<em>float</em><em>, </em><em>optional</em>) – Constraint used in the lengthscale of the periodic kernel if present. The default is None.</p></li>
+<li><p><strong>likelihood_noise_constraint</strong> (<em>float</em><em>, </em><em>optional</em>) – Constraint used in the magnitude of the noise adder to the covariance matrix. The default is 1e-4.</p></li>
+<li><p><strong>use_cholesky</strong> (<em>bool</em><em>, </em><em>optional</em>) – Use cholesky decompisition during training. The default is True.</p></li>
+<li><p><strong>periodic</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true add a periodic kernel to the base_kernel. The default is False.</p></li>
+<li><p><strong>n_mixtures</strong> (<em>int</em><em>, </em><em>optional</em>) – The default is 4.</p></li>
+<li><p><strong>base_kernel</strong> (<em>str</em><em>, </em><em>optional</em>) – Base kernel to use in the covariance matrix. The default is ‘RBF’.</p></li>
+<li><p><strong>train_auto_stop</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, stop training after early_stoppage_iterations of no improvement. The default is True.</p></li>
+<li><p><strong>auto_stop_tol</strong> (<em>float</em><em>, </em><em>optional</em>) – If absolute change in loss is below this value, stop traning. The default is 1e-5.</p></li>
+<li><p><strong>early_stoppage_iterations</strong> (<em>int</em><em>, </em><em>optional</em>) – If during training the loss does not improve within this many iterations, stop training. The default is 100.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="timeseries_forecast.GP_model.GPModel.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">training_iter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.GP_model.GPModel.train" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>training_iter</strong> (<em>int</em>) – Number of training iterations to perform</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="timeseries_forecast.GP_model.GPModel.update_training_data">
+<span class="sig-name descname"><span class="pre">update_training_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.GP_model.GPModel.update_training_data" title="Permalink to this definition"></a></dt>
+<dd><p>Update the training data stored within the object.  When training,
+the GP will use this data to refine the fitting parameters. Can
+be used to refine existing models instead of retraining from
+scratch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>newX</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>newy</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>replace</strong> (<em>bool</em><em>, </em><em>optional</em>) – Append to the existing training set or replace.
+The default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="timeseries_forecast.GP_model.GPModel.get_estimate">
+<span class="sig-name descname"><span class="pre">get_estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncertainty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'confidence'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.GP_model.GPModel.get_estimate" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>uncertainty</strong> (<em>str</em><em>, </em><em>optional</em>) – Either sets the uncertainty to be based
+on the confidence (95%) of the mean prediction or the
+prediction interval (95%), which bounds were we would expect
+to see a newly measured value. The default is ‘confidence’.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p><strong>observed_pred</strong> –</p>
+<p>gpytorch object that includes the attributes/methods:</p>
+<blockquote>
+<div><p>confidence_region
+mean
+variance</p>
+</div></blockquote>
+<dl>
+<dt>Example:</dt><dd><p>observed_pred = GP.get_estimate(X, uncertainty=’confidence’)</p>
+<p># Get upper and lower confidence bounds
+lower, upper = observed_pred.confidence_region()</p>
+<p># Get the expectation
+mean = observed_pred.mean.numpy()</p>
+<p># Get the variance
+mean = observed_pred.variance.numpy()</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="timeseries_forecast.GP_model.GPModel.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncertainty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'confidence'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.GP_model.GPModel.plot" title="Permalink to this definition"></a></dt>
+<dd><p>Generate figures of the GP performance with the X,y data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>y</strong> (<em>np.array</em><em>, </em><em>optional</em>) – The default is None.</p></li>
+<li><p><strong>uncertainty</strong> (<em>str</em><em>, </em><em>optional</em>) – confidence or prediction. The default is ‘confidence’.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="timeseries_forecast.GP_model.GPModel.print_parameters">
+<span class="sig-name descname"><span class="pre">print_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.GP_model.GPModel.print_parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Print to screen the raw GP parameters,
+the constraints on each of these parameters,
+and the transformed actual values of these
+parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-timeseries_forecast.parametric">
+<span id="timeseries-forecast-parametric-module"></span><h2>timeseries_forecast.parametric module<a class="headerlink" href="#module-timeseries_forecast.parametric" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="timeseries_forecast.parametric.ts_model">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">timeseries_forecast.parametric.</span></span><span class="sig-name descname"><span class="pre">ts_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volatility_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.parametric.ts_model" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Provides a pass through interface for
+AutoARIMA or ARCH models.</p>
+<p>Users should see the following links for full API inputs to
+these functions. This object currently provides no additional
+value for ARIMA.</p>
+<p>Main functionality is the additional of AutoARCH grid searching.</p>
+<dl class="simple">
+<dt>AutoARIMA documentation:</dt><dd><p><a class="reference external" href="http://alkaline-ml.com/pmdarima/modules/generated/pmdarima.arima.AutoARIMA.html#pmdarima.arima.AutoARIMA">http://alkaline-ml.com/pmdarima/modules/generated/pmdarima.arima.AutoARIMA.html#pmdarima.arima.AutoARIMA</a></p>
+</dd>
+<dt>Arch documentation:</dt><dd><p><a class="reference external" href="https://arch.readthedocs.io/en/latest/">https://arch.readthedocs.io/en/latest/</a></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>volatility_model</strong> (<em>bool</em><em>, </em><em>optional</em>) – Determines if an ARIMA or ARCH model should be used.
+Default is False, which uses an ARIMA model.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>In this example, an ARIMA model is automatically selected that
+best fits the provided ‘y’ data. The automation performs a
+parallized grid search with the max AR lags of 8, max MA lags
+of 3, and 1 level of signal differencing is used.</p>
+<p>The predict function will start from the end of the training
+data and forecast n_periods into the future.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">twinstat.timeseries_forecast.parametric</span> <span class="kn">import</span> <span class="n">ts_model</span>
+<span class="n">TS</span> <span class="o">=</span> <span class="n">ts_model</span><span class="p">(</span><span class="n">max_p</span> <span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+              <span class="n">max_q</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+              <span class="n">D</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+              <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+              <span class="n">stepwise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">TS</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">TS</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="n">TS</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">n_periods</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="timeseries_forecast.parametric.ts_model.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.parametric.ts_model.plot" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Some useful diagnostic plots to determine
+what the proper AR and MA terms would be
+for the provided data.</p>
+<p>Note that the a decaying ACF will determine MA
+and a decarying PACF will determine AR.  Users may
+want to increase the number of lags shown, to
+assess if a season lag needs to be included
+in the models.</p>
+<p>Users are recommended to see a time series text
+to fully understand how to use these plots.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>series</strong> (<em>np.array</em>) – Data to plot.</p></li>
+<li><p><strong>lags</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of lags to include in the plot. The default is 40.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>None.</em></p></li>
+<li><p>rtype: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="timeseries_forecast.parametric.ts_model.auto_arch">
+<span class="sig-name descname"><span class="pre">auto_arch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_o</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_q</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#timeseries_forecast.parametric.ts_model.auto_arch" title="Permalink to this definition"></a></dt>
+<dd><p>Perform a grid search to find best ARCH model.
+Performance criteria based on the Bayesian Information Criterion (BIC)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>series</strong> (<em>np.array</em>) – Data to fit.</p></li>
+<li><p><strong>max_p</strong> (<em>int</em><em>, </em><em>optional</em>) – max AR terms to use in the fitting. The default is 3.</p></li>
+<li><p><strong>max_o</strong> (<em>int</em><em>, </em><em>optional</em>) – max asymmetric innovation terms to use in the fitting. The default is 0.</p></li>
+<li><p><strong>max_q</strong> (<em>int</em><em>, </em><em>optional</em>) – max MA terms to use in the fitting. The default is 3.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of parallel processes to use.  -1 will
+attempt to use all available CPUs. The default is 1.</p></li>
+<li><p><strong>rescale</strong> (<em>bool</em><em>, </em><em>optional</em>) – Internally rescale data to improve convergence.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-timeseries_forecast">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-timeseries_forecast" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, AWS AC Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

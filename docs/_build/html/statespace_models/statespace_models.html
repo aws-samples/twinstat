@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>statespace_models package &mdash; TwinStat 0.2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TwinStat
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">statespace_models package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-statespace_models.estimators">statespace_models.estimators module</a><ul>
+<li><a class="reference internal" href="#statespace_models.estimators.kalman"><code class="docutils literal notranslate"><span class="pre">kalman</span></code></a><ul>
+<li><a class="reference internal" href="#statespace_models.estimators.kalman.get_estimate"><code class="docutils literal notranslate"><span class="pre">kalman.get_estimate()</span></code></a></li>
+<li><a class="reference internal" href="#statespace_models.estimators.kalman.state_func"><code class="docutils literal notranslate"><span class="pre">kalman.state_func()</span></code></a></li>
+<li><a class="reference internal" href="#statespace_models.estimators.kalman.obs_func"><code class="docutils literal notranslate"><span class="pre">kalman.obs_func()</span></code></a></li>
+<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">kalman.get_estimate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#statespace_models.estimators.HiddenVarModel"><code class="docutils literal notranslate"><span class="pre">HiddenVarModel</span></code></a><ul>
+<li><a class="reference internal" href="#statespace_models.estimators.HiddenVarModel.default_params"><code class="docutils literal notranslate"><span class="pre">HiddenVarModel.default_params</span></code></a></li>
+<li><a class="reference internal" href="#statespace_models.estimators.HiddenVarModel.PX0"><code class="docutils literal notranslate"><span class="pre">HiddenVarModel.PX0()</span></code></a></li>
+<li><a class="reference internal" href="#statespace_models.estimators.HiddenVarModel.f"><code class="docutils literal notranslate"><span class="pre">HiddenVarModel.f()</span></code></a></li>
+<li><a class="reference internal" href="#statespace_models.estimators.HiddenVarModel.PX"><code class="docutils literal notranslate"><span class="pre">HiddenVarModel.PX()</span></code></a></li>
+<li><a class="reference internal" href="#statespace_models.estimators.HiddenVarModel.PY"><code class="docutils literal notranslate"><span class="pre">HiddenVarModel.PY()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#statespace_models.estimators.particle_filter"><code class="docutils literal notranslate"><span class="pre">particle_filter</span></code></a><ul>
+<li><a class="reference internal" href="#statespace_models.estimators.particle_filter.get_estimate"><code class="docutils literal notranslate"><span class="pre">particle_filter.get_estimate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-statespace_models">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TwinStat</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">statespace_models package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/statespace_models/statespace_models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="statespace-models-package">
+<h1>statespace_models package<a class="headerlink" href="#statespace-models-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-statespace_models.estimators">
+<span id="statespace-models-estimators-module"></span><h2>statespace_models.estimators module<a class="headerlink" href="#module-statespace_models.estimators" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="statespace_models.estimators.kalman">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">statespace_models.estimators.</span></span><span class="sig-name descname"><span class="pre">kalman</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kf_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_noise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state_covariance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_covariance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_em_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_std_estimate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.kalman" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<blockquote>
+<div><p>Provides an interface for various types of
+kalman filters.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kf_type</strong> (<em>str</em>) – <ul class="simple">
+<li><p>‘kf’ : standard kalman filter</p></li>
+<li><p>’skf’ : smoothed standard kalman filter</p></li>
+<li><p>’ukf’ : unscented kalman filter</p></li>
+<li><p>’akf’ : adaptive kalman filter</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>n_em_iterations: int, optional</dt><dd><p>‘kf’ type uses the EM algorithm to optimize the
+transition and observation matrices.  This option sets the
+number of allowable iterations.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="statespace_models.estimators.kalman.get_estimate">
+<span class="sig-name descname"><span class="pre">get_estimate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.kalman.get_estimate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<p>See <a class="reference external" href="https://en.wikipedia.org/wiki/Kalman_filter">https://en.wikipedia.org/wiki/Kalman_filter</a> for more information on
+how Kalman Filters work.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kf_type</strong> (<em>str</em>) – kf, skf, akf, ukf</p></li>
+<li><p><strong>data</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>transition_matrix</strong> (<em>np.array</em><em>, </em><em>optional</em>) – If not present, identity matrix is used. The default is None.</p></li>
+<li><p><strong>observation_matrix</strong> (<em>np.array</em><em>, </em><em>optional</em>) – If not present, identity matrix is used. The default is None.</p></li>
+<li><p><strong>measurement_noise</strong> (<em>np.array</em><em>, </em><em>optional</em>) – If not present, TwinStat will utilize a rolling variance calculation
+to estimate each individual variable setting the diagnols of the matrix.
+The default is None.</p></li>
+<li><p><strong>initial_state</strong> (<em>np.array</em><em>, </em><em>optional</em>) – If not present TwinStat will use the first data points in the provided data. The default is None.</p></li>
+<li><p><strong>initial_state_covariance</strong> (<em>np.array</em><em>, </em><em>optional</em>) – If not present, identity matrix is used. The default is None.</p></li>
+<li><p><strong>process_covariance</strong> (<em>np.array</em><em>, </em><em>optional</em>) – If not present, the measurement covariance matrix is used. The default is None.</p></li>
+<li><p><strong>n_em_iterations</strong> (<em>int</em><em>, </em><em>optional</em>) – When using akf, the EM algorithm will use this many iterations. The default is 10.</p></li>
+<li><p><strong>window_std_estimate</strong> (<em>int</em><em>, </em><em>optional</em>) – When estimating the measurment noise, TwinStat will using this many lags in
+the rolling variance estimation. The default is 5.</p></li>
+<li><p><strong>ncpu</strong> (<em>int</em><em>, </em><em>optional</em>) – UKF will use ncpu for sigma point evaluation. The default is 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="statespace_models.estimators.kalman.state_func">
+<span class="sig-name descname"><span class="pre">state_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.kalman.state_func" title="Permalink to this definition"></a></dt>
+<dd><p>A user is expected to provide their own state
+transition function for UKF, otherwise the default
+is the identity matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>x</strong> (<em>np.array</em>) – Input vector</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Predicted next hidden variable value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statespace_models.estimators.kalman.obs_func">
+<span class="sig-name descname"><span class="pre">obs_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.kalman.obs_func" title="Permalink to this definition"></a></dt>
+<dd><p>A user is expected to provide their own
+observation function for UKF, otherwise the default
+is the identity matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>x</strong> (<em>np.array</em>) – Input vector</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Predicted next hidden variable value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">get_estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition"></a></dt>
+<dd><p>Use the kalman filter type to estimate the 0:n
+estimations of the hidden statespace variable for the
+provided data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>data</strong> (<em>np.array</em>) – </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>filtered_state_means</strong> (<em>np.array</em>)</p></li>
+<li><p><strong>filtered_state_covariances</strong> (<em>np.array</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="statespace_models.estimators.HiddenVarModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">statespace_models.estimators.</span></span><span class="sig-name descname"><span class="pre">HiddenVarModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.HiddenVarModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">StateSpaceModel</span></code></p>
+<p>Definition of the hidden variable model to be used in the
+particle filtering.</p>
+<p>This object currently assumes both a gaussian hidden markov
+variables and a guassian measurment error.</p>
+<p>Also assumes a unity observation/transition function.</p>
+<p>Users can instantiate this object and alter various parts based on
+their application.  Use the customized object with the ‘statespace_model’
+model input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sigmaX</strong> (<em>float</em><em>, </em><em>optional</em>) – </p></li>
+<li><p><strong>sigmaY</strong> (<em>float</em><em>, </em><em>optional</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="statespace_models.estimators.HiddenVarModel.default_params">
+<span class="sig-name descname"><span class="pre">default_params</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'sigmaX':</span> <span class="pre">0.5,</span> <span class="pre">'sigmaY':</span> <span class="pre">0.5}</span></em><a class="headerlink" href="#statespace_models.estimators.HiddenVarModel.default_params" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statespace_models.estimators.HiddenVarModel.PX0">
+<span class="sig-name descname"><span class="pre">PX0</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.HiddenVarModel.PX0" title="Permalink to this definition"></a></dt>
+<dd><p>Define the function that initializes the particle filter</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statespace_models.estimators.HiddenVarModel.f">
+<span class="sig-name descname"><span class="pre">f</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.HiddenVarModel.f" title="Permalink to this definition"></a></dt>
+<dd><p>Define the transition function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statespace_models.estimators.HiddenVarModel.PX">
+<span class="sig-name descname"><span class="pre">PX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.HiddenVarModel.PX" title="Permalink to this definition"></a></dt>
+<dd><p>Define the sampling distribution of the transition function</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statespace_models.estimators.HiddenVarModel.PY">
+<span class="sig-name descname"><span class="pre">PY</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.HiddenVarModel.PY" title="Permalink to this definition"></a></dt>
+<dd><p>Define the observation sampling distribution</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="statespace_models.estimators.particle_filter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">statespace_models.estimators.</span></span><span class="sig-name descname"><span class="pre">particle_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmaX</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmaY</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_particles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statespace_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_std_estimate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.particle_filter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<blockquote>
+<div><p>Provides an interface for sequential monte carlo
+particle filtering of time series signals. Relying on
+the “particles” package.</p>
+</div></blockquote>
+<p>Default model:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">sigmaX</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">N</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">sigmaY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>While the assumed model is gaussian variability, user can provide
+their own statespace model by extending the particles
+StateSpaceModel object.  See the default _HiddenVarModel object
+as an example for setup.</p>
+<p>Full package options can be found here:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://particles-sequential-monte-carlo-in-python.readthedocs.io/en/latest/">https://particles-sequential-monte-carlo-in-python.readthedocs.io/en/latest/</a></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>np.array</em><em>, </em><em>optional</em>) – required if no values are provided for sigmaX and sigmaY</p></li>
+<li><p><strong>sigmaX</strong> (<em>float</em><em>, </em><em>optional</em><em>,</em>) – Assumed gaussian noise of the hidden variable.
+If user provides no value, a moving average with window of ‘window_std_estimate’
+of the standard deviation will be used. Note that this variable will control
+the level of smoothing relative to the sigmaY value. The smaller sigmaX
+is relative to sigmaY, the greater the smoothing.</p></li>
+<li><p><strong>sigmaY</strong> (<em>float</em><em>, </em><em>optional</em><em>,</em>) – Assumed gaussian noise of the measurement variable.
+If user provides no value, a moving average with window of ‘window_std_estimate’
+of the standard deviation will be used.</p></li>
+<li><p><strong>n_particles</strong> (<em>float</em><em>, </em><em>optional</em>) – Number of particles to use in monte carlo sampling.</p></li>
+<li><p><strong>statespace_model</strong> (<em>object</em><em>, </em><em>optional</em>) – </p></li>
+<li><p><strong>window_std_estimate</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 5</em>) – Window size used when estimating the mesurement variability.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="statespace_models.estimators.particle_filter.get_estimate">
+<span class="sig-name descname"><span class="pre">get_estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statespace_models.estimators.particle_filter.get_estimate" title="Permalink to this definition"></a></dt>
+<dd><p>Use the SIR particle filter to estimate the 0:n
+predictions of the provided data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>data</strong> (<em>np.array</em>) – </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>means</strong> (<em>np.array</em>)</p></li>
+<li><p><strong>variances</strong> (<em>np.array</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-statespace_models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-statespace_models" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, AWS AC Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
