@@ -1,8 +1,9 @@
 # twinstat
 
-[![pipeline status](https://gitlab.aws.dev/twinstat)](https://gitlab.aws.dev/twinstat/badges/main/pipeline.svg)
 
-A data science python library (TwinStat) is needed as a toolbox to be used by a variety of other AWS services ranging from Twinmaker, do-pm, SimSpace Weaver, SageMaker, etc.  TwinStat was designed as a toolbox for the TwinFlow Level 4 Digital Twin Framework. The leveling framework can be read about here: https://aws.amazon.com/blogs/iot/digital-twins-on-aws-unlocking-business-value-and-outcomes/
+A data science python library (TwinStat) is needed as a toolbox to be used by a variety of other AWS services ranging from Twinmaker, do-pm, SimSpace Weaver, SageMaker, etc.  TwinStat was designed as a toolbox for the TwinFlow Level 4 Digital Twin Framework. The leveling framework can be read about [here](https://aws.amazon.com/blogs/iot/digital-twins-on-aws-unlocking-business-value-and-outcomes/).
+
+TwinStat is part of the [TwinFlow](https://github.com/aws-samples/twinflow) toolset which can be read about in this [blog](https://aws.amazon.com/blogs/hpc/predictive-models-and-simulations-with-twinflow-on-aws/). Other tools within TwinFlow are [TwinModules](https://github.com/aws-samples/twinmodules), which enables easier interaction with the AWS cloud, and [TwinGraph](https://github.com/aws-samples/twingraph), which enables scalable graph orchestration.
 
 
 ## Features
