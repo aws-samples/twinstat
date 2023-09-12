@@ -12,15 +12,18 @@ import pandas
 import matplotlib.pyplot as plot
 from tqdm import tqdm
 from joblib import Parallel, delayed
+import seaborn as sns
+sns.set(style="darkgrid")
 
-
+#TODO: update docstring
 class GeneticAlgorithm:
     def __init__(self, fitness_function, population_size:int, generations:int, bounds:list[tuple],
                        record_method:str = 'csv',
                        sql_info:dict = {},
                        mutation_rate:float=0.1,
                        best_fraction:float = 0.5,
-                       crossover_method:str = 'chromosome'):
+                       crossover_method:str = 'chromosome',
+                       crossover_switch_iterations:int = 10):
         '''
 
         Create object for genetic algorithm global heuristic optimization.
@@ -58,12 +61,14 @@ class GeneticAlgorithm:
             'Chromosome' uses a random switch point in the two parent vectors to create
             new offspring.
 
-            'Hilleclimbing' uses the random weighted average to create offspring.
+            'Hillclimbing' uses the random weighted average to create offspring.
 
-            'Switch' will use chromosome until the last 10 generations and then the
+            'Switch' will use chromosome until the last crossover_switch_iterations generations and then the
             method is switched to hillclimbing to fine tune the remainder.
 
             The default is 'chromosome'.
+
+        crossover_switch_iterations : int, optional
 
         Methods
         -------
@@ -92,8 +97,11 @@ class GeneticAlgorithm:
         self.generation_count = 0
         self.best_fraction = best_fraction
         self.csv_record = "GA_generation_data.csv"
-        self.crossover_method = crossover_method
+        self.crossover_method = crossover_method.lower()
+        self.crossover_switch_iterations = crossover_switch_iterations
 
+        if self.crossover_method not in ['chromosome', 'hillclimbing', 'switch']:
+            raise ValueError("Unknown crossover method.")
 
         #TODO: not setup yet
         if record_method =='sql':
@@ -196,8 +204,7 @@ class GeneticAlgorithm:
             self._record_generation_results(gen)
             self._selection()
             if self.crossover_method.lower() == 'switch':
-                #TODO: add more options here to manipulate method switch
-                if (self.generations - gen ) <=10:
+                if (self.generations - gen ) <= self.crossover_switch_iterations:
                     self._crossover(method='hillclimbing')
                 else:
                     self._crossover(method='chromosome')
@@ -271,10 +278,18 @@ class GeneticAlgorithm:
 
             convergence.append(np.min(group['fitness_score']))
 
-        plot.figure()
+        plot.figure(figsize=(9,4))
+        plot.subplot(121)
         plot.plot(convergence)
         plot.ylabel("Fitness Score")
-        plot.xlabel("Iterations")
+        plot.xlabel("Generations")
+
+        plot.subplot(122)
+        plot.plot(np.add(convergence, np.abs(np.min(convergence)) ))
+        plot.yscale('log')
+        plot.ylabel("Fitness Score (log)")
+        plot.xlabel("Generations")
+
         plot.tight_layout()
         plot.savefig('./images/GA_convergence.png')
         plot.close()
