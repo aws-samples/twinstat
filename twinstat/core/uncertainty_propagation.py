@@ -146,7 +146,7 @@ def uncertainty_propagation(evaluate_data,
     unc_prop_results = {}
 
     local_config = copy.deepcopy(config)
-    local_config['eval_table'] = 'uncertainty_propagation_samples'
+    local_config['eval_table'] = 'UncertaintyPropagationSamples'
     local_config['uid'] = random.getrandbits(24)
 
     if method.lower() == 'pce':
@@ -155,7 +155,7 @@ def uncertainty_propagation(evaluate_data,
 
         X = joint.sample(num_samples, seed=seed, rule=sampling_method)
         evaluate_data(X.T, local_config)
-        df = get_dataframe_results(config, 'uncertainty_propagation_samples')
+        df = get_dataframe_results(config, 'UncertaintyPropagationSamples')
 
         for output in outputs:
             y = df[output]
@@ -186,7 +186,7 @@ def uncertainty_propagation(evaluate_data,
 
         evaluate_data(X, local_config)
 
-        df = get_dataframe_results(config, 'uncertainty_propagation_samples')
+        df = get_dataframe_results(config, 'UncertaintyPropagationSamples')
 
         for output in outputs:
             y = df[output]
@@ -248,13 +248,13 @@ def uncertainty_propagation(evaluate_data,
                              unc_prop_results[col]['xtest']])
             data = data.T
             columns = [col+'_pdf', col+'_xtest']
-            sql.send_sql_data('uncertainty_propagation_pdf', columns, data )
+            sql.send_sql_data('UncertaintyPropagationPDF', columns, data )
 
             data = np.array([unc_prop_results[col]['cdf'],
                              unc_prop_results[col]['xtest']])
             data = data.T
             columns = [col+'_cdf', col+'_xtest']
-            sql.send_sql_data('uncertainty_propagation_cdf', columns, data )
+            sql.send_sql_data('UncertaintyPropagationCDF', columns, data )
 
 
         for col in sensitivities.keys():
@@ -264,4 +264,4 @@ def uncertainty_propagation(evaluate_data,
             data = [col]
             data.extend(sensitivities[col])
             data = [data]
-            sql.send_sql_data('uncertainty_propagation_sensitivity', columns, data )
+            sql.send_sql_data('UncertaintyPropagationSensitivity', columns, data )

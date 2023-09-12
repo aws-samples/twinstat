@@ -11,12 +11,14 @@ import numpy as np
 import pandas
 import copy
 from joblib import Parallel, delayed
+import sys
 
 import particles
 from particles import state_space_models as ssm
 from particles import distributions as dists
 from particles.collectors import Moments
 
+EPSILON = sys.float_info.epsilon
 
 #--------------------------------------------------------------------------------------
 class kalman(object):
@@ -323,6 +325,7 @@ class kalman(object):
             except:
                 sigma_points[:,j] = x_pred - np.sqrt(c * np.abs(P_pred))[:,j-n-1] * np.sign(P_pred[:,j-n-1])
 
+
         # Propagate the sigma points through the state function
         # x_sigma_pred = np.zeros((n, 2 * n + 1))
         # for i in range(2 * n + 1):
@@ -364,8 +367,8 @@ class kalman(object):
         x_pred += K @ (Y - y_pred)
         P_pred -= K @ Pyy_pred @ K.T
 
-        #ensure variance never goes non-negative due to round off
-        np.fill_diagonal(P_pred, np.maximum(np.diag(P_pred),0)+1e-10)
+        #ensure variance never goes non-positive due to round off
+        np.fill_diagonal(P_pred, np.maximum(np.diag(P_pred),EPSILON))
 
         return x_pred, P_pred, K
 
