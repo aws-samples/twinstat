@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "twinstat"
 description = "A data science python library (twinstat) is needed as a toolbox to be used by a variety of other AWS services ranging from Twinmaker, do-pm, SimSpace Weaver, SageMaker, etc. twinstat needs to include different methods for general subcategories of data science needs."
-version = "0.3.0"
+version = "0.3.1"
 license = "MIT"
 
 authors = []
@@ -20,12 +20,12 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python =  ">=3.10,<3.11"
+python =  ">=3.10,<3.12"
 arch="^5.5.0"
 matplotlib="^3.7.1"
-numpy="^1.23.4"
+numpy="^1.26.1"
 particles="^0.3"
-pmdarima="^1.8.5"
+pmdarima="^2.0.4"
 #pykalman="0.9.5"
 tensorflow="^2.12.0"
 tensorflow-addons="^0.20.0"
@@ -42,10 +42,10 @@ m2r2 = "^0.3.3"
 sphinx-autodoc-typehints = "^1.19.5"
 scipy="^1.10.1"
 gpytorch="^1.10"
-llvmlite="^0.39.1"
-numba="^0.56.4"
+llvmlite="^0.41.1"
+numba="^0.58.1"
 scikit-learn="^1.2.2"
-autogluon="^0.7.0"
+#autogluon="^0.7.0"
 chaospy="^4.3"
 tensorflow-io-gcs-filesystem="^0.31.0"
 shap="^0.41"
