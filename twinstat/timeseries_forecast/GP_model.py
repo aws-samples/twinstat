@@ -10,6 +10,22 @@ import gpytorch
 import matplotlib.pyplot as plot
 import numpy as np
 
+# from torch.utils.data import Dataset
+# from torch.utils.data import DataLoader
+scaler = torch.cuda.amp.GradScaler()
+
+# class GPDataset(Dataset):
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+
+#     def __len__(self):
+#         return self.x.shape[0]
+
+#     def __getitem__(self, idx):
+#         return self.x[idx], self.y[idx]
+
+
 class PhysicsKernel_CrackGrowth(gpytorch.means.mean.Mean):
     def __init__(self, initial_crack_length,
                        periodic_load=0.05,
@@ -131,6 +147,7 @@ class _ExactGPModel(gpytorch.models.ExactGP):
                  mean_function='constant',
                  periodic=False,
                  lengthscale_constraint=None,
+                 lengthscale_direction='greaterthan',
                  outputscale_constraint=None,
                  periodic_period_constraint=None,
                  periodic_lengthscale_constraint=None,
@@ -140,13 +157,18 @@ class _ExactGPModel(gpytorch.models.ExactGP):
         if mean_function =='constant':
             self.mean_module = gpytorch.means.ConstantMean()
         elif mean_function =='linear':
-            #TODO: only setup for single output
-            self.mean_module = gpytorch.means.LinearMean(1)
+            if len(train_x.shape) > 1:
+                 self.mean_module = gpytorch.means.LinearMean(train_x.shape.shape[1])
+            else:
+                 self.mean_module = gpytorch.means.LinearMean(1)
         else:
             self.mean_module = mean_function
 
         if lengthscale_constraint is not None:
-            lengthscale_constraint= gpytorch.constraints.GreaterThan(lengthscale_constraint)
+            if lengthscale_direction =='greaterthan':
+                lengthscale_constraint= gpytorch.constraints.GreaterThan(lengthscale_constraint)
+            else:
+                lengthscale_constraint= gpytorch.constraints.LessThan(lengthscale_constraint)
         if outputscale_constraint is not None:
             outputscale_constraint= gpytorch.constraints.GreaterThan(outputscale_constraint)
 
@@ -233,6 +255,7 @@ class GPModel(object):
                  mean_function:str = 'constant',
                  likelihood_function:str = 'gaussian',
                  lengthscale_constraint:float = None,
+                 lengthscale_direction:str = 'greaterthan',
                  outputscale_constraint:float = None,
                  periodic_period_constraint:float = None,
                  periodic_lengthscale_constraint:float = None,
@@ -243,7 +266,8 @@ class GPModel(object):
                  base_kernel:str='RBF',
                  train_auto_stop:bool = True,
                  auto_stop_tol:float = 1e-5,
-                 early_stoppage_iterations:int = 100):
+                 early_stoppage_iterations:int = 100,
+                 gpu:bool = False):
         '''
 
 
@@ -308,6 +332,7 @@ class GPModel(object):
                                       mean_function=mean_function,
                                       periodic=periodic,
                                       lengthscale_constraint=lengthscale_constraint,
+                                      lengthscale_direction=lengthscale_direction,
                                       outputscale_constraint=outputscale_constraint,
                                       periodic_period_constraint=periodic_period_constraint,
                                       periodic_lengthscale_constraint=periodic_lengthscale_constraint,
@@ -328,6 +353,7 @@ class GPModel(object):
         self.train_auto_stop = train_auto_stop
         self.auto_stop_tol = auto_stop_tol
         self.early_stoppage_iterations = early_stoppage_iterations
+        self.gpu = gpu
 
         # Use the adam optimizer
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)  # Includes GaussianLikelihood parameters
@@ -337,19 +363,24 @@ class GPModel(object):
 
 
     def _iterate_training(self, training_iter):
+
         early_stop_cnt = 0
         best_min = 1e9
         for i in range(training_iter):
             # Zero gradients from previous iteration
             self.optimizer.zero_grad()
             # Output from model
+            #with torch.cuda.amp.autocast():
             output = self.model(self.train_x)
             # Calc loss and backprop gradients
             loss = -self.mll(output, self.train_y)
             loss.backward()
+            #scaler.scale(loss).backward()
             print('Iter %d/%d - Loss: %.3f' % (i + 1, training_iter, loss.item()))
             self.losses.append(loss.item())
             self.optimizer.step()
+            #scaler.step(self.optimizer)
+            #scaler.update()
 
             if self.train_auto_stop:
                 if len(self.losses) > 2:
@@ -364,7 +395,10 @@ class GPModel(object):
             if early_stop_cnt > self.early_stoppage_iterations:
                 break
 
-    def train(self, training_iter:int) -> None:
+
+    def train(self, training_iter:int
+              #batch_size:int = 32
+              ) -> None:
         '''
 
         Parameters
@@ -377,6 +411,25 @@ class GPModel(object):
         None
 
         '''
+
+        if self.gpu:
+            self.model = self.model.to(0)
+
+            #TODO: gpytorch not working with multi-GPU, need to investigate
+            #world_size = torch.cuda.device_count()
+            #self.model = torch.nn.DataParallel(self.model, device_ids=list(range(world_size)))
+
+            self.train_x = self.train_x.to(0)
+            self.train_y = self.train_y.to(0)
+
+        # ds = GPDataset(self.train_x, self.train_y)
+        # self.dataloader = DataLoader(
+        #                             dataset=ds,
+        #                             batch_size=batch_size,
+        #                             shuffle=True
+        #                             )
+
+
         self.model.train()
         self.likelihood.train()
         self.losses = []
@@ -392,10 +445,10 @@ class GPModel(object):
 
         #determine model average performance
         observed_pred = self.get_estimate(self.train_x)
-        r = np.array(self.train_y - observed_pred.mean)
+        r = np.array(self.train_y.cpu() - observed_pred.mean.cpu())
         self.mse = np.var(r)
         self.rmse = np.sqrt(self.mse)
-        self.rmse_rel = self.rmse / np.mean(np.array(self.train_y))
+        self.rmse_rel = self.rmse / np.mean(np.array(self.train_y.cpu()))
 
     def update_training_data(self, newX:np.array, newy:np.array, replace:bool=False) -> None:
         '''
@@ -467,6 +520,9 @@ class GPModel(object):
         if not isinstance(X, torch.Tensor):
             X = torch.Tensor(X)
 
+        if self.gpu:
+            X = X.to(0)
+
         # Make predictions by feeding model through likelihood
         with torch.no_grad(), gpytorch.settings.fast_pred_var():
             if uncertainty == 'confidence':
@@ -509,13 +565,13 @@ class GPModel(object):
             # Plot training data as black stars
 
             if y is not None:
-                ax.scatter(X.numpy(), y.numpy(), s=40, facecolors='none', edgecolors='black')
+                ax.scatter(X.cpu().numpy(), y.cpu().numpy(), s=40, facecolors='none', edgecolors='black')
 
             # Plot predictive means as blue line
-            ax.plot(X.numpy(), observed_pred.mean.numpy(), 'b')
+            ax.plot(X.cpu().numpy(), observed_pred.mean.cpu().numpy(), 'b')
             # Shade between the lower and upper confidence bounds
-            ax.fill_between(X.numpy(), lower.numpy(),
-                            upper.numpy(), alpha=0.5)
+            ax.fill_between(X.cpu().numpy(), lower.cpu().numpy(),
+                            upper.cpu().numpy(), alpha=0.5)
             #ax.legend(['Observed Data', 'Mean', 'Confidence'])
             if uncertainty == 'confidence':
                 ax.legend(['GP Mean', '95% Confidence\nInterval'])
@@ -569,7 +625,8 @@ if __name__ == '__main__':
                   base_kernel='matern',
                   #lengthscale_constraint=200,
                   auto_stop_tol=1e-6,
-                  mean_function=PhysicsKernel_CrackGrowth(0.01)
+                  mean_function=PhysicsKernel_CrackGrowth(0.01),
+                  gpu=False
                   )
     GP.train(50000)
 
