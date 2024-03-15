@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "twinstat"
 description = "A data science python library (twinstat) is needed as a toolbox to be used by a variety of other AWS services ranging from Twinmaker, do-pm, SimSpace Weaver, SageMaker, etc. twinstat needs to include different methods for general subcategories of data science needs."
-version = "0.3.1"
+version = "0.3.2"
 license = "MIT"
 
 authors = []
